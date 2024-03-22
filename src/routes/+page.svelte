@@ -1,10 +1,15 @@
-<script>
+<script lang=ts>
+    import { page } from '$app/stores';
+    
+    const leftUrl = $page.url.searchParams.get('left');
+    const rightUrl = $page.url.searchParams.get('left');
+
     let slider = '50%';
 </script>
 
 <div>
-    <img src="/STILL2.jpg" alt="left" class="pane left" style="--slider: {slider}">
-    <img src="/STILL1.jpg" alt="right" class="pane right" style="--slider: {slider}">
+    <img src={leftUrl} alt="left" class="pane left" style="--slider: {slider}">
+    <img src={rightUrl} alt="right" class="pane right" style="--slider: {slider}">
 </div>
 
 <style>
