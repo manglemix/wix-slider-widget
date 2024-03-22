@@ -1,8 +1,13 @@
 <script lang=ts>
     import { page } from '$app/stores';
+	import { beforeUpdate } from 'svelte';
     
-    const leftUrl = $page.url.searchParams.get('left');
-    const rightUrl = $page.url.searchParams.get('left');
+    let leftUrl: string; 
+    let rightUrl: string;
+    beforeUpdate(() => {
+        leftUrl = $page.url.searchParams.get('left');
+        rightUrl = $page.url.searchParams.get('right');
+    });
 
     let slider = '50%';
 </script>
