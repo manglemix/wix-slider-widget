@@ -76,7 +76,6 @@ class WixDefaultCustomElement extends HTMLElement {
   connectedCallback() {
     this.appendChild(createStyle());
     this.appendChild(createImageContainer());
-    this.appendChild(createTextContainer());
   }
 }
 customElements.define('wix-default-custom-element', WixDefaultCustomElement);
