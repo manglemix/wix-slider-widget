@@ -60,7 +60,7 @@
 	#sliderPanel {
 		display: flex;
 		flex-direction: column;
-		width: 96vw;
+		width: 100vw;
 		height: var(--height);
 		justify-content: center;
 	}
@@ -84,7 +84,7 @@
 	}
 
 	.pane {
-		width: 96vw;
+		width: 100vw;
 		position: absolute;
 	}
 
