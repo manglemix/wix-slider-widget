@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import { beforeUpdate } from 'svelte';
 
-	let width = 500;
 	let slider = 50.0;
 
 	let leftUrl: string | null;
@@ -12,31 +11,32 @@
 		leftUrl = $page.url.searchParams.get('left');
 		rightUrl = $page.url.searchParams.get('right');
 
-		if ($page.url.searchParams.has('width')) {
-			width = Number($page.url.searchParams.get('width'));
-		}
+		// if ($page.url.searchParams.has('width')) {
+		// 	width = Number($page.url.searchParams.get('width'));
+		// }
 
 		if ($page.url.searchParams.has('slider')) {
 			slider = Number($page.url.searchParams.get('slider'));
 		}
 	});
 
+	let aspectRatio = 1.77;
 	let img: HTMLImageElement;
 </script>
 
 <div>
-	<img src={leftUrl} alt="left" class="pane" bind:this={img} style="--width: {width}px" on:load={() => img = img}/>
+	<img src={leftUrl} alt="left" class="pane" bind:this={img} on:load={() => aspectRatio = img.width / img.height}/>
 	<img
 		src={rightUrl}
 		alt="right"
 		class="pane right"
-		style="--slider: {slider}%; --width: {width}px"
+		style="--slider: {slider}%;"
 	/>
 	<div
 		id="slider-column"
-		style="--height: {img?.height ?? 0}px; --left: {(slider / 100) * width + 7}px;"
+		style="--height: {100 / aspectRatio}vw; --left: calc({slider}vw + 7px);"
 	></div>
-	<div id="sliderPanel" style="--height: {img?.height ?? 0}px; --width: {width}px;">
+	<div id="sliderPanel" style="--height: {100 / aspectRatio}vw;">
 		<input type="range" bind:value={slider} step="any" />
 	</div>
 </div>
@@ -51,10 +51,16 @@
 		padding: 0;
 	}
 
+    img {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
 	#sliderPanel {
 		display: flex;
 		flex-direction: column;
-		width: var(--width);
+		width: 100vw;
 		height: var(--height);
 		justify-content: center;
 	}
@@ -78,7 +84,7 @@
 	}
 
 	.pane {
-		width: var(--width);
+		width: 100vw;
 		position: absolute;
 	}
 
