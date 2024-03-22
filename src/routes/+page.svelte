@@ -43,7 +43,7 @@
 
 <style>
 	:global(body) {
-		background-color: black;
+		background-color: transparent;
 	}
 
 	* {
