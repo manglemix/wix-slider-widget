@@ -34,7 +34,7 @@
 	/>
 	<div
 		id="slider-column"
-		style="--height: {100 / aspectRatio}vw; --left: calc({slider}vw + 7px);"
+		style="--height: {96 / aspectRatio}vw; --left: calc({slider * 0.96}vw + 7px);"
 	></div>
 	<div id="sliderPanel" style="--height: {100 / aspectRatio}vw;">
 		<input type="range" bind:value={slider} step="any" />
