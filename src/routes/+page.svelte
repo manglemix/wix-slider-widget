@@ -37,8 +37,8 @@
 		style="--height: {96 / aspectRatio}vw; --left: calc({slider * 0.96}vw - 0.2vw);"
 	></div>
 	<div id="overlayPanel" style="--height: {96 / aspectRatio}vw;">
-		<h1 style="--slider: {slider * 2}%;" id="before">&nbsp;Before</h1>
-		<h1 style="--slider: {(slider - 50) * 2}%;" id="after">After&nbsp;</h1>
+		<h1 style="--slider: {slider * 2}%;" id="before">&nbsp;&nbsp;&nbsp;Before</h1>
+		<h1 style="--slider: {(slider - 50) * 2}%;" id="after">After&nbsp;&nbsp;&nbsp;</h1>
 	</div>
 	<div id="sliderPanel" style="--height: {96 / aspectRatio}vw;">
 		<input type="range" bind:value={slider} step="any" />
@@ -74,7 +74,7 @@
 
 	#overlayPanel h1 {
 		/* margin: 2vw; */
-		font-size: 10vw;
+		font-size: 4vw;
 		color: white;
 		opacity: 0.0;
   		transition: opacity 0.35s;
