@@ -24,7 +24,7 @@
 	let img: HTMLImageElement;
 </script>
 
-<div>
+<div style="position: relative">
 	<img src={leftUrl} alt="left" class="pane" bind:this={img} on:load={() => aspectRatio = img.width / img.height}/>
 	<img
 		src={rightUrl}
@@ -34,9 +34,13 @@
 	/>
 	<div
 		id="slider-column"
-		style="--height: {96 / aspectRatio}vw; --left: calc({slider * 0.96}vw + 6px);"
+		style="--height: {96 / aspectRatio}vw; --left: calc({slider * 0.96}vw - 0.2vw);"
 	></div>
-	<div id="sliderPanel" style="--height: {100 / aspectRatio}vw;">
+	<div id="overlayPanel" style="--height: {96 / aspectRatio}vw;">
+		<h1 style="--slider: {slider * 2}%;" id="before">&nbsp;Before</h1>
+		<h1 style="--slider: {(slider - 50) * 2}%;" id="after">After&nbsp;</h1>
+	</div>
+	<div id="sliderPanel" style="--height: {96 / aspectRatio}vw;">
 		<input type="range" bind:value={slider} step="any" />
 	</div>
 </div>
@@ -57,6 +61,43 @@
         user-select: none;
     }
 
+	#overlayPanel {
+		position: absolute;
+		background-color: rgba(0, 0, 0, 0);
+		display: flex;
+		width: 96vw;
+		height: var(--height);
+		/* justify-content: stretch; */
+		align-items: center;
+  		transition: background-color 0.35s;
+	}
+
+	#overlayPanel h1 {
+		/* margin: 2vw; */
+		font-size: 10vw;
+		color: white;
+		opacity: 0.0;
+  		transition: opacity 0.35s;
+		width: 100%;
+	}
+
+	#overlayPanel:hover {
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	#before {
+		clip-path: rect(0 var(--slider) 100% 0%);
+	}
+
+	#after {
+		text-align: end;
+		clip-path: rect(0 100% 100% var(--slider));
+	}
+
+	#overlayPanel:hover h1 {
+		opacity: 1.0;
+	}
+
 	#sliderPanel {
 		display: flex;
 		flex-direction: column;
@@ -67,17 +108,17 @@
 
 	#sliderPanel > input {
 		margin-left: -2vw;
-		margin-right: -1.9vw;
+		margin-right: -2vw;
 		z-index: 100;
 		appearance: none;
 		background: transparent;
-		clip-path: rect(0 calc(100% - 7px) 100% 7px);
+		clip-path: rect(0 calc(100% - 2vw) 100% 2vw);
 	}
 
 	#slider-column {
 		position: absolute;
 		height: var(--height);
-		width: 2px;
+		width: 0.35vw;
 		left: var(--left);
 		z-index: 100;
 		background-color: white;
@@ -104,6 +145,7 @@
 		width: 4vw;
 		border-radius: 50%;
 		background: white;
+		z-index: 100;
 	}
 	input[type='range']:focus {
 		outline: none;
